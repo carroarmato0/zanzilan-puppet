@@ -7,3 +7,6 @@
 [submodule "modules/epel"]
 	path = modules/epel
 	url = https://github.com/stahnma/puppet-module-epel.git
+[submodule "modules/timezone"]
+	path = modules/timezone
+	url = https://github.com/saz/puppet-timezone.git
