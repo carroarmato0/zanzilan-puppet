@@ -10,3 +10,6 @@
 [submodule "modules/timezone"]
 	path = modules/timezone
 	url = https://github.com/saz/puppet-timezone.git
+[submodule "modules/dnsmasq"]
+	path = modules/dnsmasq
+	url = https://github.com/saz/puppet-dnsmasq.git
