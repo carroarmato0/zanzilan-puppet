@@ -1,0 +1,28 @@
+# Set domain
+domain=<%= scope.lookupvar('domain') %>
+
+# Upstream DNS servers
+<% scope.lookupvar('upstream_dns_servers').each do |server| -%>
+server=<%= server %>
+<% end -%>
+
+# Prevent non-routable private addresses from being forwarded
+bogus-priv
+
+# Prepend domain to all hosts
+expand-hosts
+
+# Only bind to interfaces that it's listening on
+bind-interfaces
+
+# Be authoritative and barge in when a machine wakes up and broadcasts's a dhcp request
+dhcp-authoritative
+
+# For debugging purposes, log each DNS query as it passes through dnsmasq.
+#log-queries
+
+# Log lots of extra information about DHCP transactions.
+#log-dhcp
+
+# Log location
+log-facility=/var/log/dnsmasq.log
