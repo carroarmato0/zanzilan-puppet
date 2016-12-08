@@ -19,3 +19,6 @@
 [submodule "modules/firewall"]
 	path = modules/firewall
 	url = https://github.com/puppetlabs/puppetlabs-firewall.git
+[submodule "modules/nginx"]
+	path = modules/nginx
+	url = https://github.com/voxpupuli/puppet-nginx.git
