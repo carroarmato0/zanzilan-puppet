@@ -14,4 +14,24 @@ define profile_dnsmasq::lan (
     content => template('profile_dnsmasq/dnsmasq.lan.conf.erb'),
   }
 
+  firewall {"053 accept DNS on ${title} interface over UDP":
+    proto   => 'udp',
+    dport   => '53',
+    iniface => $interface,
+    action  => 'accept',
+  }
+  firewall {"053 accept DNS on ${title} interface over TCP":
+    proto   => 'tcp',
+    dport   => '53',
+    iniface => $interface,
+    action  => 'accept',
+  }
+  firewall {"067 accept DHCP request on ${title} interface":
+    proto   => 'udp',
+    dport   => ['67','68'],
+    sport   => ['67','68'],
+    iniface => $interface,
+    action  => 'accept',
+  }
+
 }
