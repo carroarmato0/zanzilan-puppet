@@ -5,6 +5,7 @@ class profile_base::packages {
     'nano',
     'vim-minimal',
     'tcpdump',
+    'dhcping',
   ]
 
   package { $default_package_list:
