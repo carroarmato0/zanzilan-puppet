@@ -5,10 +5,10 @@ dhcp-range=<%= scope.lookupvar('interface') %>,<%= scope.lookupvar('dhcp_range')
 dhcp-option=<%= scope.lookupvar('interface') %>,3,<%= scope.lookupvar('gw_ipaddress') %>
 
 # Pass DNS server
-dhcp-option=<%= scope.lookupvar('interface') %>,6,<%= scope.lookupvar('dns_servers') %>
+dhcp-option=<%= scope.lookupvar('interface') %>,6,<%= scope.lookupvar('dns_servers').join(',') %>
 
 # Pass search domain
 dhcp-option=<%= scope.lookupvar('interface') %>,119,<%= scope.lookupvar('domain') %>
 
 # Pass NTP server
-dhcp-option=<%= scope.lookupvar('interface') %>,42,<%= scope.lookupvar('ntp_servers') %>
+dhcp-option=<%= scope.lookupvar('interface') %>,42,<%= scope.lookupvar('ntp_servers').join(',') %>
