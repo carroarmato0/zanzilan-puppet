@@ -40,40 +40,25 @@ define profile_dnsmasq::lan (
     'dport'       => '53',
     'iniface'     => $interface,
     'action'      => 'accept',
+    'chain'       => 'DNS',
   }
   $dns_tcp_defaults = {
     'proto'       => 'tcp',
     'dport'       => '53',
     'iniface'     => $interface,
     'action'      => 'accept',
+    'chain'       => 'DNS',
   }
   $ntp_udp_defaults = {
     'proto'       => 'udp',
     'dport'       => '123',
     'iniface'     => $interface,
     'action'      => 'accept',
+    'chain'       => 'NTP',
   }
   create_resources(firewall, $dns_udp_hash, $dns_udp_defaults)
   create_resources(firewall, $dns_tcp_hash, $dns_tcp_defaults)
   create_resources(firewall, $ntp_udp_hash, $ntp_udp_defaults)
-
-  # $dns_servers.each |String $dns_destination| {
-  #   firewall {"053 accept DNS on ${title} interface over UDP to ${dns_destination}":
-  #     proto       => 'udp',
-  #     dport       => '53',
-  #     iniface     => $interface,
-  #     destination => $dns_destination,
-  #     action      => 'accept',
-  #   }
-  #   firewall {"053 accept DNS on ${title} interface over TCP to ${dns_destination}":
-  #     proto       => 'tcp',
-  #     dport       => '53',
-  #     iniface     => $interface,
-  #     destination => $dns_destination,
-  #     action      => 'accept',
-  #   }
-
-  # }
 
   firewall {"067 accept DHCP request on ${title} interface":
     proto   => 'udp',
@@ -81,6 +66,7 @@ define profile_dnsmasq::lan (
     sport   => ['67','68'],
     iniface => $interface,
     action  => 'accept',
+    chain   => 'DHCP',
   }
 
 }
