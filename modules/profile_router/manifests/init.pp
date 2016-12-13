@@ -1,5 +1,4 @@
 class profile_router (
-  $wan_address,
   $wan_interface = $::interfaces[0],
   $natted_lans = {},
 ) {
