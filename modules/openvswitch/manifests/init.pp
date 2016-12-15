@@ -1,6 +1,7 @@
 class openvswitch (
-  $service = 'running',
-  $package = 'installed',
+  $service      = 'running',
+  $package      = 'installed',
+  $manage_repo  = true,
 ) {
 
   include openvswitch::package
