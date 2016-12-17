@@ -25,9 +25,6 @@
 [submodule "modules/concat"]
 	path = modules/concat
 	url = https://github.com/puppetlabs/puppetlabs-concat.git
-[submodule "modules/network"]
-	path = modules/network
-	url = https://github.com/voxpupuli/puppet-network.git
 [submodule "modules/filemapper"]
 	path = modules/filemapper
 	url = https://github.com/voxpupuli/puppet-filemapper.git
