@@ -9,4 +9,10 @@ define openvswitch::helpers::port2bridge (
     unless  => "ovs-vsctl port-to-br ${port} | grep -c ${bridge}",
   }
 
+  network::interface { $port:
+    type        => 'OVSPort',
+    devicetype  => 'ovs',
+    ovs_bridge  => $bridge,
+  }
+
 }
