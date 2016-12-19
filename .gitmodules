@@ -36,7 +36,7 @@
 	url = https://github.com/example42/puppet-network.git
 [submodule "modules/lxc"]
 	path = modules/lxc
-	url = git@github.com:carroarmato0/puppet-lxc.git
+	url = https://github.com/carroarmato0/puppet-lxc.git
 [submodule "modules/resolv_conf"]
 	path = modules/resolv_conf
 	url = https://github.com/saz/puppet-resolv_conf.git
