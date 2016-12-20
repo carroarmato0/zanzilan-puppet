@@ -33,7 +33,7 @@
 	url = https://github.com/voxpupuli/puppet-boolean.git
 [submodule "modules/network"]
 	path = modules/network
-	url = https://github.com/example42/puppet-network.git
+	url = https://github.com/carroarmato0/puppet-network.git
 [submodule "modules/lxc"]
 	path = modules/lxc
 	url = https://github.com/carroarmato0/puppet-lxc.git
