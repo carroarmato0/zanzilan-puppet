@@ -9,5 +9,11 @@ class profile_lxc (
     bridge       => $bridge,
   }
 
+  file {'/usr/share/lxc/templates/lxc-centos-puppet':
+    ensure => file,
+    mode   => '0755',
+    source => 'puppet:///modules/profile_lxc/centos-puppet',
+  }
+
   create_resources('::lxc::container', $containers)
 }
