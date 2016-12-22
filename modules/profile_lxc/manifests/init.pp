@@ -12,6 +12,8 @@ class profile_lxc (
   file {'/usr/share/lxc/templates/lxc-centos-puppet':
     ensure => file,
     mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
     source => 'puppet:///modules/profile_lxc/centos-puppet',
   }
 
