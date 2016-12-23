@@ -1,6 +1,8 @@
 class profile_dnsmasq (
   $domain,
+  $cache_server,
   $upstream_dns_servers,
+  $addresses = {},
   $lans = {},
 ) {
 
@@ -9,6 +11,11 @@ class profile_dnsmasq (
   dnsmasq::conf { 'general_options':
     ensure  => present,
     content => template('profile_dnsmasq/dnsmasq.general.conf.erb'),
+  }
+
+  dnsmasq::conf { 'game_cdns':
+    ensure  => present,
+    content => template('profile_dnsmasq/dnsmasq.gamecache.conf.erb'),
   }
 
   firewallchain { 'DNS:filter:IPv4':
