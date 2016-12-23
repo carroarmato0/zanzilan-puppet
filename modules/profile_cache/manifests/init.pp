@@ -35,6 +35,18 @@ class profile_cache (
     },
   }
 
+  file { $cachedir:
+    ensure  => directory,
+    mode    => '0644',
+    owner   => $::nginx::daemon_user,
+    group   => $::nginx::log_group,
+  }
+  file { "${cachedir}/tmp":
+    ensure  => directory,
+    mode    => '0644',
+    owner   => $::nginx::daemon_user,
+    group   => $::nginx::log_group,
+  }
   file { '/var/log/nginx/lancache':
     ensure  => directory,
     mode    => '0644',
