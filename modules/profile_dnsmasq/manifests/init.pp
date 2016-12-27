@@ -23,6 +23,12 @@ class profile_dnsmasq (
     before => undef,
   }
 
+  firewall { '999 drop all DNS':
+    proto  => 'all',
+    action => 'drop',
+    chain  => 'DNS',
+  }
+
   firewall {'053 jump to DNS TCP chain':
     proto       => 'tcp',
     dport       => '53',
@@ -39,6 +45,12 @@ class profile_dnsmasq (
     before  => undef,
   }
 
+  firewall { '999 drop all NTP':
+    proto  => 'all',
+    action => 'drop',
+    chain  => 'NTP',
+  }
+
   firewall {'053 jump to NTP UDP chain':
     proto => 'udp',
     dport => '123',
@@ -48,6 +60,12 @@ class profile_dnsmasq (
   firewallchain { 'DHCP:filter:IPv4':
     ensure  => present,
     before  => undef,
+  }
+
+  firewall { '999 drop all DHCP':
+    proto  => 'all',
+    action => 'drop',
+    chain  => 'DHCP',
   }
 
   firewall {'067 jump to DHCP UDP chain':
