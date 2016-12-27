@@ -43,3 +43,6 @@
 [submodule "modules/puppet"]
 	path = modules/puppet
 	url = https://github.com/theforeman/puppet-puppet.git
+[submodule "modules/selinux"]
+	path = modules/selinux
+	url = https://github.com/voxpupuli/puppet-selinux.git

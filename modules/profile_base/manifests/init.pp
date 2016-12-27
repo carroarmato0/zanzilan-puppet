@@ -4,6 +4,7 @@ class profile_base {
   include ::stdlib
   include ::timezone
   include ::network
+  include ::selinux
   include ::profile_base::repos
   include ::profile_base::packages
   include ::profile_base::firewall
