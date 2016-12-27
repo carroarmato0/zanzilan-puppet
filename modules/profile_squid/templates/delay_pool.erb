@@ -1,0 +1,11 @@
+# Managed by Puppet
+
+delay_pools <%= @pools.count %>
+delay_initial_bucket_level <%= @delay_initial_bucket_level %>
+
+<%- (0..(@pools.length - 1)).each do |id| -%>
+# <%= @pools.keys[id] %>
+delay_class <%= id + 1 %> <%= @pools.fetch(@pools.keys[id]).fetch('delay_class') %> # pool <%= id + 1 %> is a class <%= @pools.fetch(@pools.keys[id]).fetch('delay_class') %> pool
+delay_parameters <%= id + 1 %> <%= @pools.fetch(@pools.keys[id]).fetch('delay_parameters') %>
+
+<% end -%>
