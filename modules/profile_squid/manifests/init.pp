@@ -55,19 +55,25 @@ class profile_squid (
         'ssl_bump' => 'none localhost',
       }
     }
-    squid::extra_config_section {'SSL Bump - server-first all':
+    # squid::extra_config_section {'SSL Bump - server-first all':
+    #   config_entries => {
+    #     'ssl_bump' => 'server-first all',
+    #   }
+    # }
+    # squid::extra_config_section {'sslproxy_cert_error allow all':
+    #   config_entries => {
+    #     'sslproxy_cert_error' => 'allow all',
+    #   }
+    # }
+    # squid::extra_config_section {'sslproxy_flags DONT_VERIFY_PEER':
+    #   config_entries => {
+    #     'sslproxy_flags' => 'DONT_VERIFY_PEER',
+    #   }
+    # }
+
+    squid::extra_config_section {'SSL Bump - do nothing':
       config_entries => {
-        'ssl_bump' => 'server-first all',
-      }
-    }
-    squid::extra_config_section {'sslproxy_cert_error allow all':
-      config_entries => {
-        'sslproxy_cert_error' => 'allow all',
-      }
-    }
-    squid::extra_config_section {'sslproxy_flags DONT_VERIFY_PEER':
-      config_entries => {
-        'sslproxy_flags' => 'DONT_VERIFY_PEER',
+        'ssl_bump' => 'splice',
       }
     }
 
@@ -83,8 +89,6 @@ class profile_squid (
       mode          => '0700',
       owner         => $::squid::daemon_user,
       group         => $::squid::daemon_group,
-      recurse       => true,
-      recurselimit  => 2,
       require       => Package[$::squid::package_name],
     }
     file { '/etc/squid/ssl_cert/server.pem':
@@ -98,11 +102,13 @@ class profile_squid (
     }
 
     file { '/var/lib/ssl_db':
-      ensure  => directory,
-      mode    => '0700',
-      owner   => $::squid::daemon_user,
-      group   => $::squid::daemon_group,
-      require => Package[$::squid::package_name],
+      ensure        => directory,
+      mode          => '0700',
+      owner         => $::squid::daemon_user,
+      group         => $::squid::daemon_group,
+      recurse       => true,
+      recurselimit  => 1,
+      require       => Package[$::squid::package_name],
     }
 
     exec { 'Initialize SSL DB':
