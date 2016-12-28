@@ -7,7 +7,9 @@ delay_initial_bucket_level <%= @delay_initial_bucket_level %>
 # <%= @pools.keys[id] %>
 delay_class <%= id + 1 %> <%= @pools.fetch(@pools.keys[id]).fetch('class') %> # pool <%= id + 1 %> is a class <%= @pools.fetch(@pools.keys[id]).fetch('class') %> pool
 delay_parameters <%= id + 1 %> <%= @pools.fetch(@pools.keys[id]).fetch('parameters') %>
-delay_access <%= id + 1 %> allow <%= @pools.fetch(@pools.keys[id]).fetch('allow') %>
+<%- @pools.fetch(@pools.keys[id]).fetch('allow').each do | allow | -%>
+delay_access <%= id + 1 %> allow <%= allow %>
+<% end -%>
 delay_access <%= id + 1 %> deny all
 
 <% end -%>

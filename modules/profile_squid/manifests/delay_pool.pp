@@ -19,6 +19,7 @@ class profile_squid::delay_pool (
     owner   => $::squid::config_user,
     group   => $::squid::config_group,
     content => template('profile_squid/delay_pool.erb'),
+    require => Package[$::squid::package_name],
     notify  => Service[$::squid::service_name],
   }
 
