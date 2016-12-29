@@ -49,3 +49,15 @@
 [submodule "modules/selinux"]
 	path = modules/selinux
 	url = https://github.com/voxpupuli/puppet-selinux.git
+[submodule "modules/php"]
+	path = modules/php
+	url = https://github.com/voxpupuli/puppet-php.git
+[submodule "modules/archive"]
+	path = modules/archive
+	url = https://github.com/voxpupuli/puppet-archive.git
+[submodule "modules/yum"]
+	path = modules/yum
+	url = https://github.com/example42/puppet-yum.git
+[submodule "modules/inifile"]
+	path = modules/inifile
+	url = https://github.com/puppetlabs/puppetlabs-inifile.git
