@@ -1,9 +1,8 @@
 class profile_webserver (
-  $server_name,
+  $vhosts             = {},
   $php_version        = '5.6',
   $worker_processes   = undef,
   $worker_connections = undef,
-  $php_backend        = 'unix:/var/run/php-fpm/www.socket',
 ) {
 
   if $worker_processes == undef {
@@ -39,29 +38,7 @@ class profile_webserver (
     manage_repos => true,
   }
 
-  nginx::resource::server { $server_name:
-    www_root        => "/var/www/${server_name}",
-    listen_options  => 'default',
-    locations       => {
-      '~ \.php$'            => {
-        'fastcgi' => $php_backend,
-      },
-      '~ ^/(status|ping)$'  => {
-        'location_cfg_append' => {
-          'access_log'      => 'off',
-        },
-        'location_allow'      => ['127.0.0.1'],
-        'location_deny'       => ['all'],
-        'fastcgi'             => $php_backend,
-      },
-    },
-  }
-
-  file { "/var/www/${server_name}":
-    ensure  => directory,
-    mode    => '0644',
-    require => Package[$::nginx::package::package_name],
-  }
+  create_resources('nginx::resource::server', $vhosts, {})
 
   firewall {'080 accept port 80':
     proto   => 'tcp',
