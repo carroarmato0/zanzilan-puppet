@@ -5,6 +5,10 @@ class profile_webserver (
   $worker_connections = undef,
 ) {
 
+  class {'collectd::plugin::nginx':
+    url => 'http://localhost/status',
+  }
+
   if $worker_processes == undef {
     $real_worker_processes = $::processorcount
   } else {
