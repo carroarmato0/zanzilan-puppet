@@ -67,7 +67,7 @@
 [submodule "modules/collectd"]
 	path = modules/collectd
 	url = https://github.com/carroarmato0/puppet-collectd.git
-[submodule "graphite"]
+[submodule "modules/graphite"]
 	path = modules/graphite
 	url = https://github.com/echocat/puppet-graphite.git
 [submodule "modules/influxdb"]
@@ -79,6 +79,3 @@
 [submodule "modules/samba"]
         path = modules/samba
         url = https://github.com/ajjahn/puppet-samba.git
-[submodule "collectd"]
-	path = modules/collectd
-	url = https://github.com/carroarmato0/puppet-collectd.git
