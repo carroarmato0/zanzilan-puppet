@@ -76,3 +76,7 @@
 [submodule "modules/grafana"]
 	path = modules/grafana
 	url = https://github.com/bfraser/puppet-grafana.git
+[submodule "modules/samba"]
+        path = modules/samba
+        url = https://github.com/ajjahn/puppet-samba.git
+
