@@ -625,6 +625,8 @@ lxc.utsname = $utsname
 
 lxc.autodev = $auto_dev
 
+lxc.kmsg = 0
+
 # When using LXC with apparmor, uncomment the next line to run unconfined:
 #lxc.aa_profile = unconfined
 
