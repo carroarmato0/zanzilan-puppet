@@ -12,6 +12,12 @@ bogus-priv
 # Prepend domain to all hosts
 expand-hosts
 
+# Do not read /etc/hosts
+no-hosts
+
+# Read hosts.dnsmasq for hosts entries
+addn-hosts=/etc/hosts.dnsmasq
+
 # Only bind to interfaces that it's listening on
 bind-interfaces
 

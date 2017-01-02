@@ -4,12 +4,17 @@ class profile_dnsmasq (
   $upstream_dns_servers,
   $addresses = {},
   $lans = {},
+  $hosts = {},
 ) {
 
   include ::dnsmasq
 
   class {'::collectd::plugin::dns':
     require => Yumrepo['collectd-ci'],
+  }
+
+  concat { '/etc/hosts.dnsmasq':
+    ensure => present,
   }
 
   dnsmasq::conf { 'general_options':
@@ -80,5 +85,6 @@ class profile_dnsmasq (
   }
 
   create_resources('profile_dnsmasq::lan', $lans)
+  create_resources('profile_dnsmasq::host', $hosts)
 
 }
