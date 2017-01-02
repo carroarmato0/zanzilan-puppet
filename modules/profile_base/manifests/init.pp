@@ -1,6 +1,7 @@
 class profile_base {
 
   include ::ntp
+  include ::cron
   include ::stdlib
   include ::timezone
   include ::network

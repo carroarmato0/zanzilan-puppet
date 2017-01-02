@@ -79,3 +79,6 @@
 [submodule "modules/samba"]
         path = modules/samba
         url = https://github.com/ajjahn/puppet-samba.git
+[submodule "modules/cron"]
+	path = modules/cron
+	url = https://github.com/torrancew/puppet-cron.git
