@@ -64,3 +64,15 @@
 [submodule "modules/mysql"]
 	path = modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
+[submodule "modules/collectd"]
+	path = modules/collectd
+	url = https://github.com/carroarmato0/puppet-collectd.git
+[submodule "graphite"]
+	path = modules/graphite
+	url = https://github.com/echocat/puppet-graphite.git
+[submodule "modules/influxdb"]
+	path = modules/influxdb
+	url = https://github.com/n1tr0g/golja-influxdb.git
+[submodule "modules/grafana"]
+	path = modules/grafana
+	url = https://github.com/bfraser/puppet-grafana.git

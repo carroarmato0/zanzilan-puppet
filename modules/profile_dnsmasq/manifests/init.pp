@@ -8,6 +8,10 @@ class profile_dnsmasq (
 
   include ::dnsmasq
 
+  class {'::collectd::plugin::dns':
+    require => Yumrepo['collectd-ci'],
+  }
+
   dnsmasq::conf { 'general_options':
     ensure  => present,
     content => template('profile_dnsmasq/dnsmasq.general.conf.erb'),
