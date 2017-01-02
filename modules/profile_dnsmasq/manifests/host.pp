@@ -3,10 +3,11 @@ define profile_dnsmasq::host (
   $aliases = '' ,
 ) {
 
-  concat::fragment{ "dnsmasq_address ${tile}":
+  concat::fragment{ "dnsmasq_address ${title}":
     target  => '/etc/hosts.dnsmasq',
     content => "${ip} ${aliases} ${title}\n",
-    order   => '01'
+    order   => '01',
+    notify  => Class['dnsmasq::service'],
   }
 
 }
