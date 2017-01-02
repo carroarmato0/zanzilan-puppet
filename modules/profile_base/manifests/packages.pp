@@ -7,6 +7,7 @@ class profile_base::packages {
     'tcpdump',
     'dhcping',
     'less',
+    'bind-utils',
   ]
 
   package { $default_package_list:
