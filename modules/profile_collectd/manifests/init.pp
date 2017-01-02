@@ -7,12 +7,14 @@ class profile_collectd {
     mode    => '0644',
     source  => 'puppet:///modules/profile_collectd/collectd.service',
     notify  => Exec['Reload systemd for collectd changes'],
+    require => Package['collectd'],
   }
 
   exec { 'Reload systemd for collectd changes':
     command     => 'systemctl daemon-reload',
     path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
     refreshonly => true,
+    notify      => Service['collectd'],
   }
 
 }
