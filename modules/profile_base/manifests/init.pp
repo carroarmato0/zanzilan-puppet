@@ -1,6 +1,5 @@
 class profile_base {
 
-  include ::ntp
   include ::cron
   include ::stdlib
   include ::timezone
@@ -13,6 +12,10 @@ class profile_base {
 
   if $::virtual != 'virtualbox' {
     include ::puppet
+  }
+
+  if $::virtual != 'lxc' {
+    include ::ntp
   }
 
   firewall { '006 accept SSH':
