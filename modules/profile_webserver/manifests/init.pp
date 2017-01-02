@@ -6,7 +6,7 @@ class profile_webserver (
 ) {
 
   class {'collectd::plugin::nginx':
-    url => 'http://localhost/status',
+    url => 'http://localhost/nginx_status',
   }
 
   if $worker_processes == undef {
