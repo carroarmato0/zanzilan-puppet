@@ -80,3 +80,6 @@
         path = modules/samba
         url = https://github.com/ajjahn/puppet-samba.git
 
+[submodule "collectd"]
+	path = modules/collectd
+	url = git@github.com:carroarmato0/puppet-collectd.git
