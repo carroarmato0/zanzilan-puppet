@@ -28,7 +28,7 @@ class profile_mysql (
     host        => 'localhost',
     username    => 'monitor',
     password    => $monitor_password,
-    masterstats => true,
+    masterstats => false,
   }
 
 }
