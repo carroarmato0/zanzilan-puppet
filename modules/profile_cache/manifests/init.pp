@@ -73,6 +73,22 @@ class profile_cache (
     notify  => Service['nginx'],
   }
 
+  nginx::resource::server {'default':
+    listen_options        => 'default_server',
+    index_files           => ['index.html', 'index.htm'],
+    use_default_location  => false,
+    locations             => {
+      '~ ^/nginx_status$' => {
+        'location_cfg_append' => {
+          'stub_status' => 'on',
+          'access_log'  => 'off',
+        },
+        'location_allow' => ['127.0.0.1'],
+        'location_deny'  => ['all'],
+      },
+    },
+  }
+
   nginx::resource::server {'cache-steam':
     server_name           => $::profile_cache::defaults::steam_servers,
     #listen_options        => 'default_server',
@@ -88,9 +104,6 @@ class profile_cache (
     },
     use_default_location  => false,
     raw_append            => template('profile_cache/steam_cache.erb'),
-    locations             => {
-
-    },
   }
 
   firewall{'080 accept HTTP':

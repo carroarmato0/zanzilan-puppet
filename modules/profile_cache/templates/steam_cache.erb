@@ -2,12 +2,6 @@
   location = /50x.html {
     root /usr/share/nginx/html;
   }
-  location ~ ^/nginx_status$ {
-    stub_status on;
-    access_log off;
-    allow 127.0.0.1;
-    deny all;
-  }
   location /depot/ {
     try_files $uri @mirror;
     access_log '/var/log/nginx/lancache/access.log' cachelog;
