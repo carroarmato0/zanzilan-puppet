@@ -1,9 +1,9 @@
 define profile_dnsmasq::lan (
-  $domain,
   $dhcp_range,
   $dns_servers,
   $ntp_servers,
   $gw_ipaddress,
+  $domain = $::profile_dnsmasq::domain,
   $interface = $::interfaces[0],
   $dhcp_lease = '24h',
   $restrict_dns = true,
