@@ -83,7 +83,7 @@ class profile_cache (
           'stub_status' => 'on',
           'access_log'  => 'off',
         },
-        'location_allow' => ['127.0.0.1'],
+        'location_allow' => ['127.0.0.1', 'localhost'],
         'location_deny'  => ['all'],
       },
     },
