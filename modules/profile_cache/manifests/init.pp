@@ -39,15 +39,6 @@ class profile_cache (
     },
   }
 
-  nginx::resource::location {'~ ^/nginx_status$':
-    location_cfg_append => {
-      'stub_status' => 'on',
-      'access_log'  => 'off',
-    },
-    location_allow      => ['127.0.0.1'],
-    location_deny       => ['all'],
-  }
-
   file { $cachedir:
     ensure  => directory,
     mode    => '0644',
@@ -97,6 +88,9 @@ class profile_cache (
     },
     use_default_location  => false,
     raw_append            => template('profile_cache/steam_cache.erb'),
+    locations             => {
+
+    },
   }
 
   firewall{'080 accept HTTP':
