@@ -7,7 +7,7 @@ class profile_cache (
 ) inherits profile_cache::defaults {
 
   class {'collectd::plugin::nginx':
-    url => 'http://localhost/nginx_status',
+    url => 'http://127.0.0.1/nginx_status',
   }
 
   if $worker_processes == undef {
@@ -75,7 +75,7 @@ class profile_cache (
 
   nginx::resource::server {'default':
     listen_options        => 'default_server',
-    index_files           => ['index.html', 'index.htm'],
+    index_files           => [],
     use_default_location  => false,
     locations             => {
       '~ ^/nginx_status$' => {
