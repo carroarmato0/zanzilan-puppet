@@ -37,16 +37,15 @@ class profile_cache (
     log_format                    => {
       cachelog      => '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$upstream_cache_status" "$host" "$http_range"',
     },
-    locations                     => {
-      '~ ^/nginx_status$' => {
-        'location_cfg_append' => {
-          'stub_status' => 'on',
-          'access_log'  => 'off',
-        },
-        'location_allow'      => ['127.0.0.1'],
-        'location_deny'       => ['all'],
-      },
-    }
+  }
+
+  nginx::resource::location {'~ ^/nginx_status$':
+    location_cfg_append => {
+      'stub_status' => 'on',
+      'access_log'  => 'off',
+    },
+    location_allow      => ['127.0.0.1'],
+    location_deny       => ['all'],
   }
 
   file { $cachedir:
