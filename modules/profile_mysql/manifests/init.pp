@@ -24,6 +24,11 @@ class profile_mysql (
     mysql_monitor_hostname => $monitor_hostname,
   }
 
-  
+  collectd::plugin::mysql::database {'mysql':
+    host        => 'localhost',
+    username    => 'monitor',
+    password    => $monitor_password,
+    masterstats => true,
+  }
 
 }
