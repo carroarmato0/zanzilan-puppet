@@ -6,6 +6,10 @@ class profile_cache (
   $max_file_size      = '40960m',
 ) inherits profile_cache::defaults {
 
+  class {'collectd::plugin::nginx':
+    url => 'http://localhost/nginx_status',
+  }
+
   if $worker_processes == undef {
     $real_worker_processes = $::processorcount
   } else {
@@ -33,6 +37,16 @@ class profile_cache (
     log_format                    => {
       cachelog      => '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$upstream_cache_status" "$host" "$http_range"',
     },
+    locations                     => {
+      '~ ^/nginx_status$' => {
+        'location_cfg_append' => {
+          'stub_status' => 'on',
+          'access_log'  => 'off',
+        },
+        'location_allow'      => ['127.0.0.1'],
+        'location_deny'       => ['all'],
+      },
+    }
   }
 
   file { $cachedir:
@@ -40,6 +54,7 @@ class profile_cache (
     mode    => '0644',
     owner   => $::nginx::daemon_user,
     group   => $::nginx::log_group,
+    require => Package[$::nginx::params::package_name],
   }
   file { "${cachedir}/tmp":
     ensure  => directory,
