@@ -9,8 +9,6 @@ class profile_webserver (
     url => 'http://localhost/nginx_status',
   }
 
-  include collectd::plugin::mysql
-
   if $worker_processes == undef {
     $real_worker_processes = $::processorcount
   } else {
