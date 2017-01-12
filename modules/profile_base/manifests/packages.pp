@@ -8,6 +8,7 @@ class profile_base::packages {
     'dhcping',
     'less',
     'bind-utils',
+    'iftop',
   ]
 
   package { $default_package_list:
