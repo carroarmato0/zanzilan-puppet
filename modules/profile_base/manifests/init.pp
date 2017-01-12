@@ -5,6 +5,8 @@ class profile_base {
   include ::timezone
   include ::network
   include ::selinux
+  include ::profile_base::ssh
+  include ::profile_base::accounting
   include ::profile_base::repos
   include ::profile_base::packages
   include ::profile_base::firewall
@@ -16,12 +18,6 @@ class profile_base {
 
   if $::virtual != 'lxc' {
     include ::ntp
-  }
-
-  firewall { '006 accept SSH':
-    dport    => [22,2222],
-    proto    => tcp,
-    action   => accept,
   }
 
 }

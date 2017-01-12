@@ -82,3 +82,9 @@
 [submodule "modules/cron"]
 	path = modules/cron
 	url = https://github.com/torrancew/puppet-cron.git
+[submodule "modules/sudo"]
+	path = modules/sudo
+	url = https://github.com/saz/puppet-sudo.git
+[submodule "modules/ssh"]
+	path = modules/ssh
+	url = https://github.com/saz/puppet-ssh.git
