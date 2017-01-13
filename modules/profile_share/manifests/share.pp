@@ -93,8 +93,10 @@ define profile_share::share (
 
   file { "/srv/shares/${title}":
     ensure  => $share_dir_ensure,
-    mode    => '0644',
+    mode    => '0666',
     force   => true,
+    owner   => 'nobody',
+    group   => 'nobody',
   }
 
 }

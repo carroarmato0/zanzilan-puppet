@@ -2,16 +2,18 @@ class profile_share (
   $workgroup,
   $server_string,
   $interfaces = 'eth0 lo',
+  $bind_interfaces_only = false,
   $security = 'share',
   $shares = {},
   $users = {},
 ) {
 
   class {'samba::server':
-    workgroup     => $workgroup,
-    server_string => $server_string,
-    interfaces    => $interfaces,
-    security      => $share,
+    workgroup             => $workgroup,
+    server_string         => $server_string,
+    interfaces            => $interfaces,
+    security              => $share,
+    bind_interfaces_only  => $bind_interfaces_only,
   }
 
   file { '/srv/shares/':
