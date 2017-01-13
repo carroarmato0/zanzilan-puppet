@@ -2,6 +2,7 @@ class profile_squid (
   $workers                        = $::processorcount,
   $http_access                    = {},
   $acls                           = {},
+  $refresh_patterns               = {},
   $http_port                      = '8080',
   $redirect_exclude               = [],
   $cache_mgr                      = 'root@localhost',
@@ -173,7 +174,22 @@ class profile_squid (
 
   $redirect_exclude_hash = generate_resource_hash($redirect_exclude, 'address', '')
 
+  squid::extra_config_section {'Include Refresh Patterns File':
+    order          => '70',
+    config_entries => {
+      'include'   => "/etc/${::squid::package_name}/refresh_patterns",
+    }
+  }
+
+  concat { "/etc/${::squid::package_name}/refresh_patterns":
+    ensure  => present,
+    owner   => $::squid::config_user,
+    group   => $::squid::config_group,
+    require => Package[$::squid::package_name],
+  }
+
   create_resources('squid::http_access', $http_access, {})
   create_resources('profile_squid::acl', $acls, {})
   create_resources('profile_squid::exclude', $redirect_exclude_hash, {})
+  create_resources('profile_squid::refresh_pattern', $refresh_patterns, {})
 }
