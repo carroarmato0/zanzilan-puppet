@@ -12,6 +12,8 @@ class profile_squid (
   # Memory cache configuration options
   $cache_mem                      = '512 MB',
   $minimum_object_size            = '4 KB',               # Should fit blocksize of partition
+  $maximum_object_size            = '10 MB',
+  $read_ahead_gap                 = '16 KB',
   $maximum_object_size_in_memory  = '2048 KB',
   # Disk cache configuration options
   $cache_dir                      = '/var/cache/squid',
@@ -140,6 +142,18 @@ class profile_squid (
   squid::extra_config_section {'Minimum object size':
     config_entries => {
       'minimum_object_size' => $minimum_object_size,
+    },
+  }
+
+  squid::extra_config_section {'Read Ahead Gap':
+    config_entries => {
+      'read_ahead_gap' => $read_ahead_gap,
+    },
+  }
+
+  squid::extra_config_section {'Maximum Object Size':
+    config_entries => {
+      'maximum_object_size' => $maximum_object_size,
     },
   }
 
