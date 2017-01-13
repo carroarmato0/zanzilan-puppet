@@ -157,6 +157,12 @@ class profile_squid (
     },
   }
 
+  squid::extra_config_section {'Cache Store Log':
+    config_entries => {
+      'cache_store_log' => '/var/log/squid/store.log',
+    },
+  }
+
   firewallchain { 'SQUID:filter:IPv4':
     ensure => present,
     before => undef,
