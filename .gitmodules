@@ -88,3 +88,9 @@
 [submodule "modules/ssh"]
 	path = modules/ssh
 	url = https://github.com/saz/puppet-ssh.git
+[submodule "modules/minecraft"]
+	path = modules/minecraft
+	url = https://github.com/voxpupuli/puppet-minecraft.git
+[submodule "modules/java"]
+	path = modules/java
+	url = https://github.com/puppetlabs/puppetlabs-java.git
