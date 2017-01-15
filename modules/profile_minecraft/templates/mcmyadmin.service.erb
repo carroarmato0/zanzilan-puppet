@@ -1,0 +1,20 @@
+[Unit]
+Description=McMyAdmin
+
+[Service]
+WorkingDirectory=/opt/minecraft/McMyAdmin
+User=minecraft
+
+ExecStart=/opt/minecraft/McMyAdmin/MCMA2_Linux_x86_64 \
+          -nojavatest \
+          +server.name <%= scope.lookupvar('profile_minecraft::server_name') %> \
+          <%- if scope.lookupvar('profile_minecraft::license_key') -%>
+          +mcmyadmin.licencekey <%= scope.lookupvar('profile_minecraft::license_key') %> \
+          <%- end -%>
+          +java.memory <%= scope.lookupvar('profile_minecraft::java_memory') %> \
+          +security.minimumpasswordgrade 0 \
+          +security.requirepasswordchange False \
+          +limits.maxplayers <%= scope.lookupvar('profile_minecraft::max_players') %> \
+
+[Install]
+WantedBy=multi-user.target

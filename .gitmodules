@@ -91,3 +91,6 @@
 [submodule "modules/java"]
 	path = modules/java
 	url = https://github.com/puppetlabs/puppetlabs-java.git
+[submodule "modules/staging"]
+	path = modules/staging
+	url = https://github.com/voxpupuli/puppet-staging.git
