@@ -2,6 +2,8 @@ class profile_minecraft (
   $server_port    = 25565,
 ) {
 
+  include ::java
+
   firewall {'080 accept MCMyAdmin':
     proto   => 'tcp',
     dport   => '8080',
