@@ -1,18 +1,16 @@
 class profile_minecraft (
-  $heap_size = 2048,
-  $max_players = 100,
-  $version = '1.11.2',
+  $server_port    = 25565,
 ) {
 
-  class {'minecraft':
-    heap_size   => $heap_size,
-    max_players => $max_players,
-    source      => $version,
+  firewall {'080 accept MCMyAdmin':
+    proto   => 'tcp',
+    dport   => '8080',
+    action  => 'accept',
   }
 
   firewall {'080 accept Minecraft':
     proto   => 'tcp',
-    dport   => 25565,
+    dport   => $server_port,
     action  => 'accept',
   }
 
