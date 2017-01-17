@@ -5,6 +5,7 @@ class profile_dnsmasq (
   $addresses = {},
   $lans = {},
   $hosts = {},
+  $static_ips = {},
 ) {
 
   include ::dnsmasq
@@ -14,6 +15,10 @@ class profile_dnsmasq (
   }
 
   concat { '/etc/hosts.dnsmasq':
+    ensure => present,
+  }
+
+  concat { '/etc/ethers':
     ensure => present,
   }
 
@@ -86,5 +91,7 @@ class profile_dnsmasq (
 
   create_resources('profile_dnsmasq::lan', $lans)
   create_resources('profile_dnsmasq::host', $hosts)
+  create_resources('profile_dnsmasq::static_ip', $static_ips)
+
 
 }
