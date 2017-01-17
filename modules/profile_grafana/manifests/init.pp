@@ -1,5 +1,5 @@
 class profile_grafana (
-  $interface = undef,
+  $restrict_to_interface = undef,
   $grafana_user = 'admin',
   $grafana_password = 'admin',
   $version = '4.0.2',
@@ -37,11 +37,11 @@ class profile_grafana (
     is_default        => true,
   }
 
-  if $interface != undef {
-    firewall{"100 accept Grafana from ${interface}":
+  if $restrict_to_interface != undef {
+    firewall{"100 accept Grafana from ${restrict_to_interface}":
       proto   => 'tcp',
       dport   => '3000',
-      iniface => $interface,
+      iniface => $restrict_to_interface,
       action  => 'accept',
     }
   } else {
