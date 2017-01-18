@@ -7,6 +7,16 @@ class profile_trackmania {
     manage_repos => true,
   }
 
+  package {'at':
+    ensure  => installed,
+  }
+
+  service {'atd':
+    ensure  => running,
+    enable  => true,
+    require => Package['at'],
+  }
+
   firewall {'080 accept Trackmania':
     proto   => 'tcp',
     dport   => 2450,
