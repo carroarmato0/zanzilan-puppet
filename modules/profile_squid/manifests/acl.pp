@@ -15,7 +15,6 @@ define profile_squid::acl (
         'chain'   => 'OUTPUT',
         'proto'   => 'tcp',
         'dport'   => '443',
-        'jump'    => 'REDIRECT',
         'toports' => "${::profile_squid::https_port}",
       }
 
@@ -39,7 +38,6 @@ define profile_squid::acl (
       'chain'   => 'OUTPUT',
       'proto'   => 'tcp',
       'dport'   => '80',
-      'jump'    => 'REDIRECT',
       'toports' => "${::profile_squid::http_port}",
     }
 
