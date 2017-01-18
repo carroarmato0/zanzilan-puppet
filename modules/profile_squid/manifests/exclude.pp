@@ -9,11 +9,12 @@ define profile_squid::exclude (
   }
 
   firewall {"010 exclude webtraffic from SQUID redirect for ${address}":
-    chain   => 'OUTPUT',
+    chain   => 'PREROUTING',
     proto   => 'tcp',
     dport   => $dport,
     source  => $address,
     action  => 'accept',
+    table   => 'nat',
   }
 
 }

@@ -12,11 +12,12 @@ define profile_squid::acl (
 
       $redirect_https_hash = generate_resource_hash($entries, 'source', "050 redirect port ${::profile_squid::https_port} to SQUID from ${aclname} ")
       $redirect_https_defaults = {
-        'chain'   => 'OUTPUT',
+        'chain'   => 'PREROUTING',
         'proto'   => 'tcp',
         'dport'   => '443',
         'jump'    => 'REDIRECT',
         'toports' => "${::profile_squid::https_port}",
+        'table'   => 'nat',
       }
 
       create_resources('firewall', $redirect_https_hash, $redirect_https_defaults)
@@ -36,11 +37,12 @@ define profile_squid::acl (
 
     $redirect_http_hash = generate_resource_hash($entries, 'source', "050 redirect port ${::profile_squid::http_port} to SQUID from ${aclname} ")
     $redirect_http_defaults = {
-      'chain'   => 'OUTPUT',
+      'chain'   => 'PREROUTING',
       'proto'   => 'tcp',
       'dport'   => '80',
       'jump'    => 'REDIRECT',
       'toports' => "${::profile_squid::http_port}",
+      'table'   => 'nat',
     }
 
     create_resources('firewall', $redirect_http_hash, $redirect_http_defaults)
