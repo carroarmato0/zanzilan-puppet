@@ -4,6 +4,7 @@ class profile_router (
   $bridges = {},
   $restrict_forwarding = false,
   $forwarding_rules = {},
+  $output_rules = {},
 ) {
 
   include ::openvswitch
@@ -23,7 +24,12 @@ class profile_router (
     'chain' => 'FORWARD',
   }
 
+  $output_defaults = {
+    'chain' => 'OUTPUT',
+  }
+
   create_resources('firewall', $forwarding_rules, $forwarding_defaults)
+  create_resources('firewall', $output_rules, $output_defaults)
   create_resources('openvswitch::bridge', $bridges)
   create_resources('profile_router::natted_lan', $natted_lans)
 
