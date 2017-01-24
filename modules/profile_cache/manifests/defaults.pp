@@ -15,4 +15,25 @@ class profile_cache::defaults {
     'hsar.steampowered.com.edgesuite.net',
   ]
 
+  $blizzard_servers = [
+    'dist.blizzard.com.edgesuite.net',
+    'llnw.blizzard.com',
+    'dist.blizzard.com',
+    'blizzard.vo.llnwd.net',
+    'level3.blizzard.com',
+    'blzddist1-a.akamaihd.net',
+    'blzddist2-a.akamaihd.net',
+    'blzddist1-b.akamaihd.net',
+    'blzddist2-b.akamaihd.net',
+  ]
+
+  $riot_servers = [
+    'riotgames.com',
+    'l3cdn.riotgames.com',
+    'riotgamespatcher-a.akamaihd.net',
+    'riotgamespatcher-a.akamaihd.net.edgesuite.net',
+    'riotgamespatcher-b.akamaihd.net',
+    'riotgamespatcher-b.akamaihd.net.edgesuite.net',
+  ]
+
 }

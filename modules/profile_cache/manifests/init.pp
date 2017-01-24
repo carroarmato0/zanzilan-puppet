@@ -37,6 +37,16 @@ class profile_cache (
     log_format                    => {
       cachelog      => '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$upstream_cache_status" "$host" "$http_range"',
     },
+    proxy_cache_path              => {
+      "${cachedir}/riot"      => 'riot:500m',
+      "${cachedir}/blizzard"  => 'blizzard:500m',
+    },
+    proxy_cache_levels            => '2:2',
+    proxy_cache_inactive          => '120d',
+    proxy_cache_max_size          => '15100m',
+    proxy_cache_loader_files      => '1000',
+    proxy_cache_loader_sleep      => '50ms',
+    proxy_cache_loader_threshold  => '300ms',
   }
 
   file { $cachedir:
@@ -97,12 +107,44 @@ class profile_cache (
     format_log            => 'cachelog',
     resolver              => $resolvers,
     server_cfg_prepend    => {
-      'root'            => "$cachedir/steam",
+      'root'            => "${cachedir}/steam",
       'error_page'      => '500 502 503 504 /50x.html',
       'proxy_temp_path' => "${cachedir}/tmp/ 1 2",
     },
     use_default_location  => false,
     raw_append            => template('profile_cache/steam_cache.erb'),
+  }
+
+  nginx::resource::server {'cache-blizzard':
+    server_name           => $::profile_cache::defaults::blizzard_servers,
+    index_files           => ['index.html', 'index.htm'],
+    access_log            => '/var/log/nginx/lancache/access.log',
+    error_log             => '/var/log/nginx/lancache/error.log',
+    format_log            => 'cachelog',
+    resolver              => $resolvers,
+    server_cfg_prepend    => {
+      'root'            => "${cachedir}/blizzard",
+      'error_page'      => '500 502 503 504 /50x.html',
+      'proxy_temp_path' => "${cachedir}/tmp/ 1 2",
+    },
+    use_default_location  => false,
+    raw_append            => template('profile_cache/blizzard_cache.erb'),
+  }
+
+  nginx::resource::server {'cache-riot':
+    server_name           => $::profile_cache::defaults::riot_servers,
+    index_files           => ['index.html', 'index.htm'],
+    access_log            => '/var/log/nginx/lancache/access.log',
+    error_log             => '/var/log/nginx/lancache/error.log',
+    format_log            => 'cachelog',
+    resolver              => $resolvers,
+    server_cfg_prepend    => {
+      'root'            => "${cachedir}/riot",
+      'error_page'      => '500 502 503 504 /50x.html',
+      'proxy_temp_path' => "${cachedir}/tmp/ 1 2",
+    },
+    use_default_location  => false,
+    raw_append            => template('profile_cache/riot_cache.erb'),
   }
 
   firewall{'080 accept HTTP':
