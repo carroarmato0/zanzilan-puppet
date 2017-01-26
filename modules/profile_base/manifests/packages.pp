@@ -9,6 +9,7 @@ class profile_base::packages {
     'less',
     'bind-utils',
     'iftop',
+    'tree',
   ]
 
   package { $default_package_list:
