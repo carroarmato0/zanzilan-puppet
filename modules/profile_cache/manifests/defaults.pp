@@ -36,4 +36,13 @@ class profile_cache::defaults {
     'riotgamespatcher-b.akamaihd.net.edgesuite.net',
   ]
 
+  $origin_servers = [
+    'ea.com',
+    'akamai.cdn.ea.com',
+    'download.origin.com',
+    'origin-a.akamaihd.net',
+    'lvlt.cdn.ea.com',
+    'origin-b.akamaihd.net',
+  ]
+
 }

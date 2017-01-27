@@ -147,6 +147,22 @@ class profile_cache (
     raw_append            => template('profile_cache/riot_cache.erb'),
   }
 
+  nginx::resource::server {'cache-origin':
+    server_name           => $::profile_cache::defaults::origin_servers,
+    index_files           => ['index.html', 'index.htm'],
+    access_log            => '/var/log/nginx/lancache/access.log',
+    error_log             => '/var/log/nginx/lancache/error.log',
+    format_log            => 'cachelog',
+    resolver              => $resolvers,
+    server_cfg_prepend    => {
+      'root'            => "${cachedir}/origin",
+      'error_page'      => '500 502 503 504 /50x.html',
+      'proxy_temp_path' => "${cachedir}/tmp/ 1 2",
+    },
+    use_default_location  => false,
+    raw_append            => template('profile_cache/origin_cache.erb'),
+  }
+
   firewall{'080 accept HTTP':
     proto   => 'tcp',
     dport   => 80,
