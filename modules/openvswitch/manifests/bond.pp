@@ -31,14 +31,20 @@ define openvswitch::bond (
     exec { "Set Bond mode for ${bond}":
       command => "ovs-vsctl set port ${bond} bond_mode=${mode}",
       unless  => "ovs-vsctl list port ${bond} | grep bond_mode | grep -c ${mode}",
-      require => Service['openvswitch'],
+      require => [
+        Service['openvswitch'],
+        Exec["Create bond ${bond} on ${bridge}"],
+      ],
     }
 
     if $lacp and $mode != 'balance-tcp' {
       exec { "Set LACP on ${bond}":
         command => "ovs-vsctl set port ${bond} lacp=${lacp}",
         unless  => "ovs-vsctl list port ${bond} | grep lacp | grep -c ${lacp}",
-        require => Service['openvswitch'],
+        require => [
+          Service['openvswitch'],
+          Exec["Create bond ${bond} on ${bridge}"],
+        ],
       }
     }
 
