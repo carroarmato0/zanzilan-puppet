@@ -37,7 +37,7 @@ define openvswitch::bond (
       ],
     }
 
-    if $lacp and $mode != 'balance-tcp' {
+    if $lacp {
       exec { "Set LACP on ${bond}":
         command => "ovs-vsctl set port ${bond} lacp=${lacp}",
         unless  => "ovs-vsctl list port ${bond} | grep lacp | grep -c ${lacp}",
