@@ -2,6 +2,7 @@ class profile_router (
   $wan_interface = $::interfaces[0],
   $natted_lans = {},
   $bridges = {},
+  $bonds = {},
   $restrict_forwarding = false,
   $forwarding_rules = {},
   $output_rules = {},
@@ -9,7 +10,7 @@ class profile_router (
 
   include ::openvswitch
 
-  sysctl::value {"net.ipv4.ip_forward": value => "1"}
+  sysctl::value {'net.ipv4.ip_forward': value => '1'}
 
   if $restrict_forwarding {
     firewall{'999 drop all':
@@ -31,6 +32,7 @@ class profile_router (
   create_resources('firewall', $forwarding_rules, $forwarding_defaults)
   create_resources('firewall', $output_rules, $output_defaults)
   create_resources('openvswitch::bridge', $bridges)
+  create_resources('openvswitch::bond', $bonds)
   create_resources('profile_router::natted_lan', $natted_lans)
 
 }
