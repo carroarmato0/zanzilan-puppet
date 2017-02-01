@@ -22,7 +22,7 @@ class profile_cache (
     $real_worker_connections = $worker_processes
   }
 
-  class { "nginx":
+  class { 'nginx':
     worker_processes              => $real_worker_processes,
     worker_connections            => $real_worker_connections,
     worker_rlimit_nofile          => $::ulimit,
@@ -40,6 +40,7 @@ class profile_cache (
     proxy_cache_path              => {
       "${cachedir}/riot"      => 'riot:500m',
       "${cachedir}/blizzard"  => 'blizzard:500m',
+      "${cachedir}/origin"    => 'origin:500m',
     },
     proxy_cache_levels            => '2:2',
     proxy_cache_inactive          => '120d',
