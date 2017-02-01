@@ -30,6 +30,7 @@ class profile_cache::defaults {
   $riot_servers = [
     'riotgames.com',
     'l3cdn.riotgames.com',
+    'worldwide.l3cdn.riotgames.com',
     'riotgamespatcher-a.akamaihd.net',
     'riotgamespatcher-a.akamaihd.net.edgesuite.net',
     'riotgamespatcher-b.akamaihd.net',
