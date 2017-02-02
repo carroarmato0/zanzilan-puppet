@@ -4,7 +4,6 @@
   }
   location /depot/ {
     try_files $uri @mirror;
-    access_log '/var/log/nginx/lancache/access.log' cachelog;
   }
   location / {
     proxy_next_upstream error timeout http_404;
@@ -17,7 +16,6 @@
     add_header X-Mirror-Upstream-Response-Time $upstream_response_time;
     add_header X-Mirror-Status $upstream_cache_status;
     add_header Host $host;
-    access_log '/var/log/nginx/lancache/access.log' cachelog;
   }
   location @mirror {
       proxy_store on;
@@ -31,5 +29,4 @@
       add_header X-Mirror-Upstream-Status $upstream_status;
       add_header X-Mirror-Upstream-Response-Time $upstream_response_time;
       add_header X-Mirror-Status $upstream_cache_status;
-      access_log '/var/log/nginx/lancache/access.log' cachelog;
   }
