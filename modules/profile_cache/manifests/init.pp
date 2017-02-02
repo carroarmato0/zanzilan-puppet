@@ -105,7 +105,7 @@ class profile_cache (
     index_files           => ['index.html', 'index.htm'],
     access_log            => '/var/log/nginx/lancache/access.log',
     error_log             => '/var/log/nginx/lancache/error.log',
-    format_log            => 'cachelog',
+    format_log            => 'cachelog buffer=128k flush=1m',
     resolver              => $resolvers,
     server_cfg_prepend    => {
       'root'            => "${cachedir}/steam",
@@ -121,7 +121,7 @@ class profile_cache (
     index_files           => ['index.html', 'index.htm'],
     access_log            => '/var/log/nginx/lancache/access.log',
     error_log             => '/var/log/nginx/lancache/error.log',
-    format_log            => 'cachelog',
+    format_log            => 'cachelog buffer=128k flush=1m',
     resolver              => $resolvers,
     server_cfg_prepend    => {
       'root'            => "${cachedir}/blizzard",
@@ -137,7 +137,7 @@ class profile_cache (
     index_files           => ['index.html', 'index.htm'],
     access_log            => '/var/log/nginx/lancache/access.log',
     error_log             => '/var/log/nginx/lancache/error.log',
-    format_log            => 'cachelog',
+    format_log            => 'cachelog buffer=128k flush=1m',
     resolver              => $resolvers,
     server_cfg_prepend    => {
       'root'            => "${cachedir}/riot",
@@ -153,7 +153,7 @@ class profile_cache (
     index_files           => ['index.html', 'index.htm'],
     access_log            => '/var/log/nginx/lancache/access.log',
     error_log             => '/var/log/nginx/lancache/error.log',
-    format_log            => 'cachelog',
+    format_log            => 'cachelog buffer=128k flush=1m',
     resolver              => $resolvers,
     server_cfg_prepend    => {
       'root'            => "${cachedir}/origin",
