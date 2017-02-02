@@ -31,4 +31,10 @@ class profile_mysql (
     masterstats => false,
   }
 
+  firewall {'081 accept port 3306':
+    proto   => 'tcp',
+    dport   => '3306',
+    action  => 'accept',
+  }
+
 }
