@@ -17,7 +17,14 @@ class profile_trackmania {
     require => Package['at'],
   }
 
-  firewall {'080 accept Trackmania':
+  firewall {'080 accept Trackmania TCP':
+    proto   => 'tcp',
+    dport   => 2350,
+    action  => 'accept',
+  }
+
+  firewall {'080 accept Trackmania UDP':
+    proto   => 'udp',
     dport   => 2350,
     action  => 'accept',
   }
