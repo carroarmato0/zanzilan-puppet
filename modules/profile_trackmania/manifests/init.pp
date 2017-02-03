@@ -18,7 +18,6 @@ class profile_trackmania {
   }
 
   firewall {'080 accept Trackmania':
-    proto   => 'tcp',
     dport   => 2350,
     action  => 'accept',
   }
