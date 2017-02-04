@@ -4,7 +4,7 @@ class profile_router (
   $bridges = {},
   $bonds = {},
   $restrict_forwarding = false,
-  $input_rules = {}
+  $input_rules = {},
   $forwarding_rules = {},
   $output_rules = {},
 ) {
