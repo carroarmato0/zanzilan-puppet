@@ -4,6 +4,7 @@ class profile_router (
   $bridges = {},
   $bonds = {},
   $restrict_forwarding = false,
+  $input_rules = {}
   $forwarding_rules = {},
   $output_rules = {},
 ) {
@@ -21,6 +22,10 @@ class profile_router (
     }
   }
 
+  $input_defaults = {
+    'chain' => 'INPUT',
+  }
+
   $forwarding_defaults = {
     'chain' => 'FORWARD',
   }
@@ -29,6 +34,7 @@ class profile_router (
     'chain' => 'OUTPUT',
   }
 
+  create_resources('firewall', $input_rules, $input_defaults)
   create_resources('firewall', $forwarding_rules, $forwarding_defaults)
   create_resources('firewall', $output_rules, $output_defaults)
   create_resources('openvswitch::bridge', $bridges)
