@@ -8,6 +8,7 @@ class profile_graphite (
     secret_key                => $secret_key,
     gr_pip_install            => true,
     gr_manage_python_packages => false,
+    gr_web_server             => 'nginx',
   }
 
   package { 'python2-pip':
