@@ -5,10 +5,10 @@ class profile_graphite (
 ) {
 
   class {'::graphite':
-    gr_timezone    => $timezone,
-    secret_key     => $secret_key,
-    gr_pip_install => false,
-    graphite_ver   => $graphite_version,
+    gr_timezone     => $timezone,
+    secret_key      => $secret_key,
+    gr_pip_install  => false,
+    gr_graphite_ver => $graphite_version,
   }
 
   package { 'python2-pip':
