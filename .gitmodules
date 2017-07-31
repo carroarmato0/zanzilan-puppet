@@ -94,3 +94,6 @@
 [submodule "modules/graphite"]
 	path = modules/graphite
 	url = https://github.com/echocat/puppet-graphite.git
+[submodule "modules/teamspeak"]
+	path = modules/teamspeak
+	url = https://github.com/RoushTech/puppet-teamspeak.git
