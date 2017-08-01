@@ -4,7 +4,6 @@ class profile_collectd (
 ) {
 
   include ::collectd
-  include ::collectd::plugin::df
 
   collectd::plugin::write_graphite::carbon {'graphite_connector':
     graphitehost   => $graphite_host,
