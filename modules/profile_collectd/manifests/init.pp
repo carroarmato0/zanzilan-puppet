@@ -4,6 +4,7 @@ class profile_collectd (
 ) {
 
   include ::collectd
+  include ::collectd::plugin::df
 
   collectd::plugin::write_graphite::carbon {'graphite_connector':
     graphitehost   => $graphite_host,
@@ -25,6 +26,10 @@ class profile_collectd (
     path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
     refreshonly => true,
     notify      => Service['collectd'],
+  }
+
+  if ! $::is_virtual {
+    include ::collectd::plugin::disk
   }
 
 }
