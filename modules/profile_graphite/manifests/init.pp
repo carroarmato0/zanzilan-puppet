@@ -23,4 +23,22 @@ class profile_graphite (
     ensure => installed,
   }
 
+  firewall{"80 accept Graphite Web":
+    proto   => 'tcp',
+    dport   => '80',
+    action  => 'accept',
+  }
+
+  firewall{"80 accept Carbon TCP":
+    proto   => 'tcp',
+    dport   => '2003',
+    action  => 'accept',
+  }
+
+  firewall{"80 accept Carbon UDP":
+    proto   => 'udp',
+    dport   => '2003',
+    action  => 'accept',
+  }
+
 }

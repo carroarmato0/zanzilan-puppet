@@ -1,6 +1,16 @@
-class profile_collectd {
+class profile_collectd (
+  $graphite_host  = 'localhost',
+  $graphite_proto = 'tcp',
+) {
 
   include ::collectd
+
+  collectd::plugin::write_graphite::carbon {'graphite_connector':
+    graphitehost   => $graphite_host,
+    graphiteport   => 2003,
+    graphiteprefix => '',
+    protocol       => $graphite_proto,
+  }
 
   file { '/etc/systemd/system/collectd.service':
     ensure  => file,
