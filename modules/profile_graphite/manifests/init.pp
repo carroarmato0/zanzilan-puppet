@@ -1,6 +1,7 @@
 class profile_graphite (
   $secret_key,
-  $timezone         = 'Europe/Brussels',
+  $timezone            = 'Europe/Brussels',
+  $restrict_to_network = '',
 ) {
 
   class {'::graphite':
@@ -23,10 +24,19 @@ class profile_graphite (
     ensure => installed,
   }
 
-  firewall{"80 accept Graphite Web":
-    proto   => 'tcp',
-    dport   => '80',
-    action  => 'accept',
+  if !empty($restrict_to_network) {
+    firewall{"80 accept Graphite Web":
+      proto   => 'tcp',
+      dport   => '80',
+      source  => $restrict_to_network,
+      action  => 'accept',
+    }
+  } else {
+    firewall{"80 accept Graphite Web":
+      proto   => 'tcp',
+      dport   => '80',
+      action  => 'accept',
+    }
   }
 
   firewall{"80 accept Carbon TCP":
