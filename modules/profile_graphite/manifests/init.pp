@@ -10,6 +10,18 @@ class profile_graphite (
     gr_pip_install            => true,
     gr_manage_python_packages => false,
     gr_web_server             => 'nginx',
+    gr_storage_schemas        => [
+      {
+        name       => 'carbon',
+        pattern    => '^carbon\.',
+        retentions => '1m:90d'
+      },
+      {
+        name       => 'default',
+        pattern    => '.*',
+        retentions => '10s:3d,60s:7d,300s:30d,600s:356d'
+      }
+    ],
   }
 
   package { 'python2-pip':
