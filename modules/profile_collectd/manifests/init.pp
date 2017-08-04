@@ -27,8 +27,4 @@ class profile_collectd (
     notify      => Service['collectd'],
   }
 
-  if ! $::is_virtual {
-    include ::collectd::plugin::disk
-  }
-
 }
