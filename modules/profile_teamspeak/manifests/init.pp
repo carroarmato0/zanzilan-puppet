@@ -1,6 +1,8 @@
 class profile_teamspeak (
     $version             = '3.0.13.8',
     $license_file        = '',
+    $username            = 'serveradmin',
+    $password            = '',
     $allow_filetransfers = false,
 ) {
 
@@ -33,6 +35,30 @@ class profile_teamspeak (
     proto   => 'tcp',
     dport   => '30033',
     action  => $accept_filetransfers,
+  }
+
+  package { 'collectd-python':
+    ensure => installed,
+    before => Class['collectd::plugin::python'],
+  }
+
+  class { 'collectd::plugin::python':
+    modulepaths    => ['/usr/share/collectd/python'],
+    modules        => {
+      'collectd_ts3' => {
+        'script_source' => 'puppet:///modules/profile_collectd/collectd_ts3.py',
+        'config'        => [
+          {
+            'Host'     => '127.0.0.1',
+            'Port'     => '10011',
+            'Username' => "${username}",
+            'Password' => "${password}",
+          },
+        ],
+      },
+    },
+    logtraces      => true,
+    interactive    => false,
   }
 
 }
