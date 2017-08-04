@@ -6,12 +6,9 @@ class profile_base::collectd {
     include ::collectd::plugin::disk
     include ::collectd::plugin::load
     include ::collectd::plugin::swap
+    include ::collectd::plugin::cgroups
     class {'::collectd::plugin::cpu': valuespercentage => true, }
     class {'::collectd::plugin::memory': valuespercentage => true, }
-    class { 'collectd::plugin::cgroups':
-      ignore_selected => true,
-      cgroups         => [],
-    }
   }
 
   include ::collectd::plugin::interface
