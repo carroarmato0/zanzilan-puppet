@@ -7,6 +7,10 @@ class profile_router (
   $input_rules = {},
   $forwarding_rules = {},
   $output_rules = {},
+  $ping_hosts = [
+    'google-public-dns-a.google.com',
+    'google-public-dns-b.google.com',
+  ],
 ) {
 
   include ::openvswitch
