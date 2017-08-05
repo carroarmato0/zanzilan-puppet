@@ -14,7 +14,10 @@ class profile_router (
 ) {
 
   include ::openvswitch
-  include ::collectd::plugin::ping
+
+  class {'::collectd::plugin::ping':
+    hosts => $ping_hosts,
+  }
 
   sysctl::value {'net.ipv4.ip_forward': value => '1'}
 
