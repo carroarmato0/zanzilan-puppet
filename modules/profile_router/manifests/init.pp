@@ -37,9 +37,11 @@ class profile_router (
       peerntp     => false,
     }
 
+    $_counter = $index + 1
+
     network::routing_table{ $value:
       table_id => $index+1,
-      table    => "ISP"+$index+1,
+      table    => "isp${_counter}",
     }
   }
 
