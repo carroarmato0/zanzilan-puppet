@@ -1,6 +1,5 @@
 class profile_router (
-  $wan_interface = $::interfaces[0],
-  $natted_lans = {},
+  $wan_interfaces = [ pick(split($::interfaces, ',')) ],
   $bridges = {},
   $bonds = {},
   $restrict_forwarding = false,
@@ -30,6 +29,29 @@ class profile_router (
     }
   }
 
+  each($wan_interfaces) | $index, $value | {
+    network::interface{$value:
+      enable_dhcp => true,
+      ipv6init    => false,
+      peerdns     => false,
+      peerntp     => false,
+    }
+
+    network::routing_table{ $value:
+      table_id => $index+1,
+      table    => "ISP"+$index+1,
+    }
+  }
+
+  $wan_defaults = {
+    enable_dhcp     => true,
+    ipv6init        => false,
+    peerdns         => false,
+    peerntp         => false,
+    defroute        => false,
+    manage_defroute => true,
+  }
+
   $input_defaults = {
     'chain' => 'INPUT',
   }
@@ -42,11 +64,20 @@ class profile_router (
     'chain' => 'OUTPUT',
   }
 
+  $nat_defaults = {
+    jump     => 'MASQUERADE',
+    chain    => 'POSTROUTING',
+    table    => 'nat',
+    proto    => 'all',
+  }
+
+  $nat_rules = generate_resource_hash($wan_interfaces, 'outiface', "201 MASQUERADE outgoing traffic ")
+
+  create_resources('firewall', $input_rules, $input_defaults)
   create_resources('firewall', $input_rules, $input_defaults)
   create_resources('firewall', $forwarding_rules, $forwarding_defaults)
   create_resources('firewall', $output_rules, $output_defaults)
+  create_resources('firewall', $nat_rules, $nat_defaults)
   create_resources('openvswitch::bridge', $bridges)
   create_resources('openvswitch::bond', $bonds)
-  create_resources('profile_router::natted_lan', $natted_lans)
-
 }
