@@ -7,7 +7,6 @@ class profile_base::collectd {
     include ::collectd::plugin::load
     include ::collectd::plugin::swap
     include ::collectd::plugin::cgroups
-    include ::collectd::plugin::lvm
     class {'::collectd::plugin::cpu': valuespercentage => true, }
     class {'::collectd::plugin::memory': valuespercentage => true, }
   }
