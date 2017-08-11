@@ -10,6 +10,7 @@ class profile_router (
     'google-public-dns-a.google.com',
     'google-public-dns-b.google.com',
   ],
+  $routing_rules = {},
 ) {
 
   include ::openvswitch
@@ -29,6 +30,10 @@ class profile_router (
     }
   }
 
+  file {"/etc/dhcp/dhclient.d/":
+    ensure => directory,
+  }
+
   each($wan_interfaces) | $index, $value | {
     network::interface{$value:
       enable_dhcp => true,
@@ -38,10 +43,17 @@ class profile_router (
     }
 
     $_counter = $index + 1
+    $table   = "isp${_counter}"
 
     network::routing_table{ $value:
       table_id => $index+1,
-      table    => "isp${_counter}",
+      table    => $table,
+    }
+
+    file {"/etc/dhcp/dhclient.d/${value}.sh":
+      ensure  => file,
+      mode    => '0755',
+      content => template('profile_router/dhcp_wan.erb'),
     }
   }
 
@@ -75,6 +87,7 @@ class profile_router (
 
   $nat_rules = generate_resource_hash($wan_interfaces, 'outiface', "201 MASQUERADE outgoing traffic ")
 
+  create_resources('network::rule', $routing_rules)
   create_resources('firewall', $input_rules, $input_defaults)
   create_resources('firewall', $forwarding_rules, $forwarding_defaults)
   create_resources('firewall', $output_rules, $output_defaults)

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+mask2cdr ()
+{
+   # Assumes there's no "255." after a non-255 byte in the mask
+   local x=${1##*255.}
+   set -- 0^^^128^192^224^240^248^252^254^ $(( (${#1} - ${#x})*2 )) ${x%%.*}
+   x=${1%%$3*}
+   echo $(( $2 + (${#x}/4) ))
+}
+
+logger -t routing "Received DHCP Trigger for <%= @value %>"
+
+if [ "$interface" = "<%= @value %>" ]; then
+  logger -t routing "Received DHCP Bound Info for <%= @value %>"
+  WAN_IP=$new_ip_address
+  WAN_GW=$new_next_server
+  WAN_NET=$new_network_number
+  WAN_CDIR=$(mask2cdr $new_subnet_mask)
+  logger -t routing "Using the following: ${WAN_IP}/${WAN_CDIR} and GW ${WAN_GW}"
+
+  ip route add $WAN_NET/$WAN_CDIR dev <%= @value %> src $WAN_IP table <%= @table %>
+  ip route add default via $WAN_GW dev <%= @value %> table <%= @table %>
+  logger -t routing "Updated IP Routing rules for <%= @value %>"
+fi
