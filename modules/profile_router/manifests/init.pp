@@ -35,11 +35,24 @@ class profile_router (
   }
 
   each($wan_interfaces) | $index, $value | {
-    network::interface{$value:
-      enable_dhcp => true,
-      ipv6init    => false,
-      peerdns     => false,
-      peerntp     => false,
+
+    # Only allow first interface as default gateway
+    if $index == 0 {
+      network::interface{$value:
+        enable_dhcp => true,
+        ipv6init    => false,
+        peerdns     => false,
+        peerntp     => false,
+        defroute    => 'true',
+      }
+    } else {
+      network::interface{$value:
+        enable_dhcp => true,
+        ipv6init    => false,
+        peerdns     => false,
+        peerntp     => false,
+        defroute    => 'false',
+      }
     }
 
     $_counter = $index + 1
@@ -55,15 +68,6 @@ class profile_router (
       mode    => '0755',
       content => template('profile_router/dhcp_wan.erb'),
     }
-  }
-
-  $wan_defaults = {
-    enable_dhcp     => true,
-    ipv6init        => false,
-    peerdns         => false,
-    peerntp         => false,
-    defroute        => false,
-    manage_defroute => true,
   }
 
   $input_defaults = {

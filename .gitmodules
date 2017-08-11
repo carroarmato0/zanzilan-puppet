@@ -97,3 +97,6 @@
 [submodule "modules/teamspeak"]
 	path = modules/teamspeak
 	url = https://github.com/RoushTech/puppet-teamspeak.git
+[submodule "modules/skydive"]
+	path = modules/skydive
+	url = https://github.com/carroarmato0/puppet-skydive.git
