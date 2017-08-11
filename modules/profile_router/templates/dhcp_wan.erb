@@ -22,7 +22,8 @@ if [ "$interface" = "<%= @value %>" ]; then
     WAN_NET=$new_network_number
     WAN_CDIR=$(mask2cdr $new_subnet_mask)
     logger -t routing "Using the following: ${WAN_IP}/${WAN_CDIR} and GW ${WAN_GW}"
-
+    logger -t routing "Flushing <%= @table %> routing rules"
+    ip route flush table <%= @table %>
     ip route add ${WAN_NET}/${WAN_CDIR} dev <%= @value %> src ${WAN_IP} table <%= @table %>
     ip route add default via ${WAN_GW} dev <%= @value %> table <%= @table %>
     logger -t routing "Updated IP Routing rules for <%= @value %>"
