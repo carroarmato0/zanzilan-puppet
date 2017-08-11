@@ -51,7 +51,7 @@ class profile_router (
     }
 
     file {"/etc/dhcp/dhclient.d/${value}.sh":
-      ensure  => file,
+      ensure  => absent,
       mode    => '0755',
       content => template('profile_router/dhcp_wan.erb'),
     }
