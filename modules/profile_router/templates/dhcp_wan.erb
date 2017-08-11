@@ -11,6 +11,8 @@ mask2cdr ()
 
 logger -t routing "Received DHCP Trigger for <%= @value %>"
 
+printenv > /tmp/dhcp-<%= @value %>
+
 if [ "$interface" = "<%= @value %>" ]; then
   logger -t routing "Received DHCP Bound Info for <%= @value %>"
   WAN_IP=$new_ip_address
