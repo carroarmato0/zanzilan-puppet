@@ -87,7 +87,7 @@ class profile_router (
 
   $nat_rules = generate_resource_hash($wan_interfaces, 'outiface', "201 MASQUERADE outgoing traffic ")
 
-  create_resources('network::rule', $routing_rules)
+  #create_resources('network::rule', $routing_rules)
   create_resources('firewall', $input_rules, $input_defaults)
   create_resources('firewall', $forwarding_rules, $forwarding_defaults)
   create_resources('firewall', $output_rules, $output_defaults)
