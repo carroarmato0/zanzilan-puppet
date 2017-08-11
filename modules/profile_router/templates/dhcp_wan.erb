@@ -14,14 +14,17 @@ logger -t routing "Received DHCP Trigger for <%= @value %>"
 printenv > /tmp/dhcp-<%= @value %>
 
 if [ "$interface" = "<%= @value %>" ]; then
-  logger -t routing "Received DHCP Bound Info for <%= @value %>"
-  WAN_IP=$new_ip_address
-  WAN_GW=$new_next_server
-  WAN_NET=$new_network_number
-  WAN_CDIR=$(mask2cdr $new_subnet_mask)
-  logger -t routing "Using the following: ${WAN_IP}/${WAN_CDIR} and GW ${WAN_GW}"
 
-  ip route add $WAN_NET/$WAN_CDIR dev <%= @value %> src $WAN_IP table <%= @table %>
-  ip route add default via $WAN_GW dev <%= @value %> table <%= @table %>
-  logger -t routing "Updated IP Routing rules for <%= @value %>"
+  if [ "$reason" = "BOUND" ]; then
+    logger -t routing "Received DHCP Bound Info for <%= @value %>"
+    WAN_IP=$new_ip_address
+    WAN_GW=$new_next_server
+    WAN_NET=$new_network_number
+    WAN_CDIR=$(mask2cdr $new_subnet_mask)
+    logger -t routing "Using the following: ${WAN_IP}/${WAN_CDIR} and GW ${WAN_GW}"
+
+    ip route add $WAN_NET/$WAN_CDIR dev <%= @value %> src $WAN_IP table <%= @table %>
+    ip route add default via $WAN_GW dev <%= @value %> table <%= @table %>
+    logger -t routing "Updated IP Routing rules for <%= @value %>"
+  fi
 fi
