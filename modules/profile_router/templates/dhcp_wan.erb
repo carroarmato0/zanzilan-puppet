@@ -18,7 +18,7 @@ if [ "$interface" = "<%= @value %>" ]; then
   if [ "$reason" = "BOUND" ]; then
     logger -t routing "Received DHCP Bound Info for <%= @value %>"
     WAN_IP=$new_ip_address
-    WAN_GW=$new_next_server
+    WAN_GW=$new_routers
     WAN_NET=$new_network_number
     WAN_CDIR=$(mask2cdr $new_subnet_mask)
     logger -t routing "Using the following: ${WAN_IP}/${WAN_CDIR} and GW ${WAN_GW}"
