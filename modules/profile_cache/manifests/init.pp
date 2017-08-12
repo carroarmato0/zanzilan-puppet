@@ -41,6 +41,7 @@ class profile_cache (
       "${cachedir}/riot"      => 'riot:500m',
       "${cachedir}/blizzard"  => 'blizzard:500m',
       "${cachedir}/origin"    => 'origin:500m',
+      "${cachedir}/uplay"     => 'uplay:500m',
     },
     proxy_cache_levels            => '2:2',
     proxy_cache_inactive          => '120d',
@@ -162,6 +163,22 @@ class profile_cache (
     },
     use_default_location  => false,
     raw_append            => template('profile_cache/origin_cache.erb'),
+  }
+
+  nginx::resource::server {'cache-uplay':
+    server_name           => $::profile_cache::defaults::uplay_servers,
+    index_files           => ['index.html', 'index.htm'],
+    access_log            => '/var/log/nginx/lancache/access.log',
+    error_log             => '/var/log/nginx/lancache/error.log',
+    format_log            => 'cachelog buffer=128k flush=1m',
+    resolver              => $resolvers,
+    server_cfg_prepend    => {
+      'root'            => "${cachedir}/uplay",
+      'error_page'      => '500 502 503 504 /50x.html',
+      'proxy_temp_path' => "${cachedir}/tmp/ 1 2",
+    },
+    use_default_location  => false,
+    raw_append            => template('profile_cache/uplay_cache.erb'),
   }
 
   firewall{'080 accept HTTP':

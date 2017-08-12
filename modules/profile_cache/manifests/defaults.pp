@@ -45,4 +45,8 @@ class profile_cache::defaults {
     'origin-b.akamaihd.net',
   ]
 
+  $uplay_servers = [
+    '*.cdn.ubi.com',
+  ]
+
 }
