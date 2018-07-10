@@ -3,6 +3,7 @@ define profile_base::user (
   $managehome = true,
   $purge_ssh_keys = true,
   $groups = undef,
+  $password = undef,
   $ssh_key_hash = {},
 ) {
 
@@ -11,6 +12,7 @@ define profile_base::user (
     groups          => $groups,
     home            => "/home/${name}",
     managehome      => $managehome,
+    password        => $password,
     purge_ssh_keys  => $purge_ssh_keys,
   }
 
