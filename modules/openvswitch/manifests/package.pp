@@ -3,8 +3,9 @@ class openvswitch::package {
   if $::openvswitch::manage_repo {
 
     yumrepo { 'centos-ovirt40-release':
-      baseurl => 'http://mirror.centos.org/centos/7/virt/$basearch/ovirt-4.0/',
-      descr => 'CentOS-7 - oVirt 4.0',
+      #baseurl => 'http://mirror.centos.org/centos/7/virt/$basearch/ovirt-4.0/',
+      baseurl => 'http://mirror.unix-solutions.be/centos/7/virt/x86_64/ovirt-4.2/',
+      descr => 'CentOS-7 - oVirt 4.2',
       enabled => '1',
       gpgcheck => '0',
     }
