@@ -6,7 +6,7 @@ class roles::gateway {
   #include profile_lxc
   #include profile_squid
   #include profile_grafana
-  #include ::resolv_conf
+  include ::resolv_conf
 
   Class['profile_router']->
   Class['profile_dnsmasq']->
