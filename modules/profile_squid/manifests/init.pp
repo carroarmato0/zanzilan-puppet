@@ -2,6 +2,7 @@ class profile_squid (
   $workers                        = $::processorcount,
   $http_access                    = {},
   $acls                           = {},
+  $cache_acls                     = {},
   $refresh_patterns               = {},
   $http_port                      = '8080',
   $redirect_exclude               = [],
@@ -210,6 +211,7 @@ class profile_squid (
 
   create_resources('squid::http_access', $http_access, {})
   create_resources('profile_squid::acl', $acls, {})
+  create_resources('profile_squid::cache_acl', $cache_acls, {})
   create_resources('profile_squid::exclude', $redirect_exclude_hash, {})
   create_resources('profile_squid::refresh_pattern', $refresh_patterns, {})
 }
