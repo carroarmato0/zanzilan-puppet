@@ -13,6 +13,9 @@ class profile_cache::defaults {
     'content8.steampowered.com',
     'clientconfig.akamai.steamstatic.com',
     'hsar.steampowered.com.edgesuite.net',
+    'media.steampowered.com',
+    'media2.steampowered.com',
+    'media4.steampowered.com',
   ]
 
   $blizzard_servers = [
