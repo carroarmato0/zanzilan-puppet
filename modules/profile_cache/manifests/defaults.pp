@@ -25,6 +25,7 @@ class profile_cache::defaults {
     'blzddist2-a.akamaihd.net',
     'blzddist1-b.akamaihd.net',
     'blzddist2-b.akamaihd.net',
+    'edgecast.blizzard.com',
   ]
 
   $riot_servers = [
