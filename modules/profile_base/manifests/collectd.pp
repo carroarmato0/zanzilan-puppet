@@ -1,7 +1,6 @@
 class profile_base::collectd {
 
   include ::profile_collectd
-  include ::collectd::plugin::disk
 
   if $::virtual != 'lxc' {
     include ::collectd::plugin::load
@@ -11,6 +10,7 @@ class profile_base::collectd {
     class {'::collectd::plugin::memory': valuespercentage => true, }
   }
 
+  include ::collectd::plugin::df
   #include ::collectd::plugin::interface
   #include ::collectd::plugin::write_network
 
