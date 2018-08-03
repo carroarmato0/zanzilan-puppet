@@ -1,9 +1,9 @@
 class profile_base::collectd {
 
   include ::profile_collectd
+  include ::collectd::plugin::disk
 
   if $::virtual != 'lxc' {
-    include ::collectd::plugin::disk
     include ::collectd::plugin::load
     include ::collectd::plugin::swap
     include ::collectd::plugin::cgroups
