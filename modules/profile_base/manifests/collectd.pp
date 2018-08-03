@@ -12,6 +12,5 @@ class profile_base::collectd {
 
   class {'::collectd::plugin::df': reportbydevice => true, }
   include ::collectd::plugin::interface
-  #include ::collectd::plugin::write_network
 
 }
