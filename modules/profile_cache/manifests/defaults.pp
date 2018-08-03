@@ -13,6 +13,9 @@ class profile_cache::defaults {
     'content8.steampowered.com',
     'clientconfig.akamai.steamstatic.com',
     'hsar.steampowered.com.edgesuite.net',
+    'media.steampowered.com',
+    'media2.steampowered.com',
+    'media4.steampowered.com',
   ]
 
   $blizzard_servers = [
@@ -25,6 +28,7 @@ class profile_cache::defaults {
     'blzddist2-a.akamaihd.net',
     'blzddist1-b.akamaihd.net',
     'blzddist2-b.akamaihd.net',
+    'edgecast.blizzard.com',
   ]
 
   $riot_servers = [
