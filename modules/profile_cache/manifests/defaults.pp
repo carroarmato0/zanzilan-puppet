@@ -1,40 +1,36 @@
 class profile_cache::defaults {
 
   $steam_servers = [
-    '*.cs.steampowered.com',
+    '*.steampowered.com',
+    '*.steamtransparent.com',
+    '*.steampowered.com.edgesuite.net',
     '*.steamcontent.com',
-    'content1.steampowered.com',
-    'content2.steampowered.com',
-    'content3.steampowered.com',
-    'content4.steampowered.com',
-    'content5.steampowered.com',
-    'content6.steampowered.com',
-    'content7.steampowered.com',
-    'content8.steampowered.com',
-    'clientconfig.akamai.steamstatic.com',
-    'hsar.steampowered.com.edgesuite.net',
-    'media.steampowered.com',
-    'media2.steampowered.com',
-    'media4.steampowered.com',
+    '*.steamstatic.com',
+    'steampipe.akamaized.net',
+    'steam.apac.qtlglb.com',
+    'steam.apac.qtlglb.com.mwcloudcdn.com',
+    '*.valve.net',
+    'steamcdn-a.akamaihd.net',
   ]
 
   $blizzard_servers = [
-    'dist.blizzard.com.edgesuite.net',
-    'llnw.blizzard.com',
-    'dist.blizzard.com',
-    'blizzard.vo.llnwd.net',
-    'level3.blizzard.com',
+    '*.blizzard.com.edgesuite.net',
+    '*.blizzard.com',
     'blzddist1-a.akamaihd.net',
     'blzddist2-a.akamaihd.net',
+    'blzddist3-a.akamaihd.net',
     'blzddist1-b.akamaihd.net',
     'blzddist2-b.akamaihd.net',
-    'edgecast.blizzard.com',
+    'blzddist3-b.akamaihd.net',
+    'blizzard.vo.llnwd.net',
+    '*.blizzard.top.comcast.net',
+    '*.battle.net',
+    'blzddistkr1-a.akamaihd.net',
+    'blizzard.nefficient.co.kr',
   ]
 
   $riot_servers = [
-    'riotgames.com',
-    'l3cdn.riotgames.com',
-    'worldwide.l3cdn.riotgames.com',
+    '*.riotgames.com',
     'riotgamespatcher-a.akamaihd.net',
     'riotgamespatcher-a.akamaihd.net.edgesuite.net',
     'riotgamespatcher-b.akamaihd.net',
@@ -42,10 +38,9 @@ class profile_cache::defaults {
   ]
 
   $origin_servers = [
-    'akamai.cdn.ea.com',
-    'download.origin.com',
+    '*.ea.com',
+    '*.origin.com',
     'origin-a.akamaihd.net',
-    'lvlt.cdn.ea.com',
     'origin-b.akamaihd.net',
   ]
 
